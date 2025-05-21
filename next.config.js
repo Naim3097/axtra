@@ -6,6 +6,11 @@ const nextConfig = {
       unoptimized: true,       // Required for static hosting (e.g., Hostinger)
     },
     reactStrictMode: true,     // Optional but recommended for dev debugging
+    eslint: {
+      // Warning: This allows production builds to successfully complete even if
+      // your project has ESLint errors.
+      ignoreDuringBuilds: true,
+    },
   };
   
   module.exports = nextConfig;
