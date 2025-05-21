@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { FiImage, FiFileText, FiPaperclip } from 'react-icons/fi';
+import Image from 'next/image';
 
 export function RevisionLog({ orderId, chatMode = false }) {
   const [logs, setLogs] = useState([]);
@@ -92,14 +93,15 @@ export function RevisionLog({ orderId, chatMode = false }) {
               {/* File display for agency */}
               {log.fileUrl && (
                 <>
-                  {isImageFile(log.fileUrl) ? (
-                    <div 
+                  {isImageFile(log.fileUrl) ? (                    <div 
                       className="rounded-lg overflow-hidden mb-2 cursor-pointer hover:opacity-90 transition-opacity"
                       onClick={() => window.open(log.fileUrl, '_blank')}
                     >
-                      <img 
+                      <Image 
                         src={log.fileUrl} 
-                        alt="Content preview" 
+                        alt="Content preview"
+                        width={400}
+                        height={300}
                         className="w-full max-h-48 object-cover"
                       />
                     </div>
@@ -147,9 +149,8 @@ export function RevisionLog({ orderId, chatMode = false }) {
             <div className="flex justify-between">
               <div className="font-medium">{log.draftNumber || 'Feedback'}</div>
               <div className="text-xs text-gray-500">{formatDate(log.createdAt)}</div>
-            </div>
-            {log.caption && <p className="mt-1">{log.caption}</p>}
-            {log.comment && <p className="mt-1 italic">"{log.comment}"</p>}
+            </div>            {log.caption && <p className="mt-1">{log.caption}</p>}
+            {log.comment && <p className="mt-1 italic">&quot;{log.comment}&quot;</p>}
             {log.fileUrl && (
               <a href={log.fileUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 text-xs hover:underline">
                 View Attachment

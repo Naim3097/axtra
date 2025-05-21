@@ -204,7 +204,7 @@ export default function ContentOrderPage() {
     return ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'bmp'].includes(ext);
   };
 
-  // Custom animation style consistent with clientpage
+  // Custom animation style
   const style = `
     @keyframes slowSpin {
       0% { transform: rotate(0deg); }
@@ -505,7 +505,7 @@ export default function ContentOrderPage() {
       {/* Include the combined styles */}
       <style dangerouslySetInnerHTML={{ __html: combinedStyles + style }} />
       
-      {/* Header - Exactly like clientpage */}
+      {/* Header */}
       <header className="sticky top-0 z-30 bg-white/10 backdrop-blur-md border-b border-white/10 shadow-lg px-4 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Left side - Info Button */}
@@ -821,7 +821,7 @@ export default function ContentOrderPage() {
         </div>
       </div>
       
-      {/* Bottom Navigation Bar - exactly like clientpage */}
+      {/* Bottom Navigation Bar */}
       <nav className="fixed bottom-0 inset-x-0 z-20 bg-black/30 backdrop-blur-lg border-t border-white/10 shadow-lg flex justify-around items-center h-16 px-2">
         <button
           className="flex flex-col items-center justify-center w-full h-full"

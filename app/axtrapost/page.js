@@ -369,7 +369,7 @@ export default function AxtraNotes() {
     );
     
     return () => unsubAuth && unsubAuth();
-  }, [router]);
+  }, [router, initAuthListener]);
   
   // Generate content feed items  
   useEffect(() => {
@@ -746,7 +746,7 @@ export default function AxtraNotes() {
                 
                 <div className="bg-purple-900/30 border border-purple-500/30 p-4 rounded-lg mt-6">
                   <p className="text-sm text-purple-300">
-                    <span className="font-bold">Note:</span> Meeting your direction deadlines helps us deliver quality content on time. You'll receive notifications as deadlines approach.
+                    <span className="font-bold">Note:</span> Meeting your direction deadlines helps us deliver quality content on time. You&apos;ll receive notifications as deadlines approach.
                   </p>
                 </div>
                 

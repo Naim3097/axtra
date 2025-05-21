@@ -1,0 +1,13 @@
+# Next.js build output
+.next/
+out/
+/build
+
+# Node modules
+node_modules/
+
+# Generated files
+public/
+
+# Any compiled/minified JavaScript in static directories
+**/*.min.js

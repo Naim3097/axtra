@@ -63,13 +63,11 @@ export default function useClientData(clientConfig) {
       );
       const snap = await getDocs(q2);
       setRevisionLog(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
-    });
-
-    return () => {
+    });    return () => {
       unsubSnapshot?.();
       unsubAuth();
     };
-  }, []);
+  }, [clientConfig]);
 
   return {
     user,

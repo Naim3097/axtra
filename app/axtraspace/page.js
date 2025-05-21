@@ -1648,9 +1648,8 @@ export default function AxtraWorkspace() {
                                 return 'Draft submitted';
                               })()}
                             </span>
-                          </div>
-                          <p className="text-sm text-white/90">
-                            Thank you for your feedback! I've updated the content to {revision.nextDraftStage}:
+                          </div>                          <p className="text-sm text-white/90">
+                            Thank you for your feedback! I&apos;ve updated the content to {revision.nextDraftStage}:
                           </p>
                         </div>
                       </div>
@@ -1771,8 +1770,6 @@ export default function AxtraWorkspace() {
 
 // Add a Toast notification component at the end of the file
 export function Toast({ message, type = "success", visible, onClose }) {
-  if (!visible) return null;
-  
   const bgColor = type === "success" ? "bg-green-500" : 
                   type === "warning" ? "bg-amber-500" : 
                   type === "error" ? "bg-red-500" : "bg-blue-500";
@@ -1786,6 +1783,8 @@ export function Toast({ message, type = "success", visible, onClose }) {
       return () => clearTimeout(timer);
     }
   }, [visible, onClose]);
+  
+  if (!visible) return null;
   
   return (
     <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">

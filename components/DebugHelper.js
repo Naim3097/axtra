@@ -6,13 +6,29 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 /**
  * A collapsible debug panel component for Firebase operations
  * This helps with identifying and fixing Firebase permission issues
+ * 
+ * We use a wrapper/inner component pattern to comply with React's Rules of Hooks:
+ * - The outer component (FirebaseDebugHelper) does the environment check
+ * - The inner component (FirebaseDebugPanel) contains all hooks
  */
 export default function FirebaseDebugHelper() {
-  // Hide in production mode
-  if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
+  // Check environment without using hooks
+  const isProd = typeof window !== 'undefined' && process.env.NODE_ENV === 'production';
+  
+  // Return null directly in production without rendering inner component
+  if (isProd) {
     return null;
   }
   
+  // Only render debug panel in development
+  return <FirebaseDebugPanel />;
+}
+
+/**
+ * The actual debug panel implementation - only rendered in development
+ * All React hooks are used here unconditionally
+ */
+function FirebaseDebugPanel() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [logs, setLogs] = useState([]);
   const [viewMode, setViewMode] = useState('operations'); // 'operations' or 'errors'

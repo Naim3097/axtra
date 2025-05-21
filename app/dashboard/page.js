@@ -51,7 +51,7 @@ export default function ClientDashboard() {
     addListener(
       query(collection(db, 'revisions'), where('clientEmail', '==', user.email)),
       'Revision Updated',
-      '/content-order'
+      '/planner'
     );
 
     addListener(
@@ -169,11 +169,6 @@ export default function ClientDashboard() {
               title: 'Campaign Planner',
               description: 'Track your scheduled deliverables.',
               link: '/planner',
-            },
-            {
-              title: 'New Content Order',
-              description: 'Submit new content requests.',
-              link: '/content-order',
             },
             {
               title: 'Monthly Reports',

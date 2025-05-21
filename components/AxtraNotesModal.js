@@ -319,9 +319,8 @@ const AxtraNotesModal = ({
                       </div>
                     )}
                   </div>
-                  
-                  <p className="text-white/70 mt-4 text-sm">
-                    You've already submitted direction for this content. Once you receive a draft, you'll be able to provide feedback.
+                    <p className="text-white/70 mt-4 text-sm">
+                    You&apos;ve already submitted direction for this content. Once you receive a draft, you&apos;ll be able to provide feedback.
                   </p>
                   
                   <div className="flex justify-end mt-6">

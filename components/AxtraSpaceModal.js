@@ -484,9 +484,8 @@ const AxtraSpaceModal = ({
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                   Visual Headline
-                </h4>
-                <div className="bg-white/5 p-4 rounded-lg border border-white/10">
-                  <p className="text-xs text-gray-300 mb-2">Internal headline for visual content. This helps guide the visual theme but won't be published.</p>
+                </h4>                <div className="bg-white/5 p-4 rounded-lg border border-white/10">
+                  <p className="text-xs text-gray-300 mb-2">Internal headline for visual content. This helps guide the visual theme but won&apos;t be published.</p>
                   <div className="flex space-x-2">
                     <div className="flex-1">
                       <textarea
