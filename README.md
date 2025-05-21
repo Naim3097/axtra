@@ -1,8 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Axtra Workspace
+
+This is a NextJS application for Axtra's content review and collaboration system.
+
+## Features
+
+- **Client Workspace Interface**: Modern UI for client content review and feedback
+- **Firebase Integration**: Real-time data synchronization and secure file storage
+- **Multi-stage Feedback System**: Structured workflow from drafts to final approval
+- **Rich Media Support**: Support for images, videos, and document attachments
 
 ## Getting Started
 
-First, run the development server:
+First, install dependencies and run the development server:
 
 ```bash
 npm run dev
@@ -29,8 +38,31 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Firebase Setup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The application requires proper Firebase configuration for permissions. To deploy the Firebase rules:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Run the deployment script:
+```bash
+cd scripts
+./deploy-firebase-rules.ps1
+```
+
+2. Deploy the rules using Firebase CLI:
+```bash
+firebase deploy --only firestore:rules
+firebase deploy --only storage:rules
+```
+
+## Available Pages
+
+- **`/dashboard-client`**: Legacy client dashboard (now superseded by axtra-workspace)
+- **`/axtra-workspace`**: Modern client workspace with improved UI and error handling
+- **`/planner`**: Content planning interface for internal teams
+- **`/agency-content-planner`**: Agency-focused content planning tools
+
+## Important Notes
+
+- The timestamp field naming convention is standardized to use both `createdAt` and `submittedAt` 
+- Client feedback permissions now properly configured in Firebase rules
+- All file uploads use client-specific paths for better organization
