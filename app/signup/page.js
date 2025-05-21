@@ -40,93 +40,215 @@ export default function SignupPage() {
     }
   };
 
+  // Custom animation style consistent with other pages
+  const style = `
+    @keyframes slowSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .slow-spin {
+      animation: slowSpin 3s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(0px); }
+    }
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-shadow {
+      0% { box-shadow: 0 0 0 0 rgba(168, 152, 255, 0.4); }
+      70% { box-shadow: 0 0 0 8px rgba(168, 152, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(168, 152, 255, 0); }
+    }
+    .pulse-shadow {
+      animation: pulse-shadow 2s infinite;
+    }
+
+    @keyframes card-glow {
+      0% { box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+      50% { box-shadow: 0 4px 25px rgba(168, 152, 255, 0.2); }
+      100% { box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+    }
+    .card-hover:hover {
+      animation: card-glow 2s ease-in-out infinite;
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    @keyframes shadow-glow {
+      0% { box-shadow: 0 0 0 rgba(168, 152, 255, 0); }
+      50% { box-shadow: 0 0 10px rgba(168, 152, 255, 0.3); }
+      100% { box-shadow: 0 0 0 rgba(168, 152, 255, 0); }
+    }
+    .hover\\:shadow-glow:hover {
+      animation: shadow-glow 1.5s ease-in-out infinite;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    .fade-in {
+      animation: fadeIn 0.3s ease-in-out forwards;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .gradient-animate {
+      background-size: 200% 200%;
+      animation: gradientShift 3s ease infinite;
+    }
+
+    /* Custom purple gradient for buttons and highlights */
+    .purple-gradient {
+      background: linear-gradient(135deg, #a898ff 0%, #da70d6 100%);
+    }
+
+    .purple-text {
+      background: linear-gradient(135deg, #a898ff 0%, #da70d6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Enhanced page background */
+    .page-bg {
+      background: linear-gradient(125deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      background-attachment: fixed;
+    }
+
+    /* Glass morphism for cards */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Form specific styles */
+    .form-input {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.5rem;
+      color: white;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: rgba(168, 152, 255, 0.5);
+      box-shadow: 0 0 0 2px rgba(168, 152, 255, 0.25);
+    }
+    
+    .form-input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .signup-button {
+      background: linear-gradient(135deg, #a898ff 0%, #da70d6 100%);
+      border: none;
+      border-radius: 0.5rem;
+      color: white;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      width: 100%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .signup-button:hover:not(:disabled) {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    
+    .signup-button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  `;
+
   return (
-    <div className="min-h-screen w-full bg-[#0b061c] text-white flex flex-col md:flex-row font-sans overflow-hidden relative">
-      {/* LEFT GRID PANEL */}
-      <div className="relative w-full md:w-1/2 h-64 md:h-auto overflow-hidden flex items-center justify-center galaxy-bg-split">
-        <div className="absolute inset-0 bg-stars z-0" />
-        <div className="z-10 px-6 py-16 text-center md:text-left max-w-lg">
-          <h1 className="text-5xl md:text-6xl font-extrabold leading-tight font-[Orbitron] tracking-wide glow-text mb-3">
-            Get Started
-          </h1>
-          <p className="text-white/80 text-sm leading-relaxed">
-            Join AXTRA and streamline your workflow, content approvals, and marketing operations.
-          </p>
-        </div>
+    <div className="min-h-screen w-full page-bg text-white flex items-center justify-center font-sans relative">
+      {/* CSS for custom animations */}
+      <style dangerouslySetInnerHTML={{ __html: style }} />
+      
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[15%] left-[10%] w-28 h-28 bg-purple-500/10 rounded-full blur-xl"></div>
+        <div className="absolute bottom-[15%] right-[10%] w-36 h-36 bg-pink-500/10 rounded-full blur-xl"></div>
+        <div className="absolute top-[35%] right-[15%] w-32 h-32 bg-blue-500/10 rounded-full blur-xl"></div>
       </div>
+      
+      <div className="w-full max-w-md px-6 py-10 relative z-10 fade-in">
+        {/* Logo removed */}
+        
+        {/* Signup Form */}
+        <div className="glass-card rounded-xl overflow-hidden p-8 card-hover">
+          <h2 className="text-center text-2xl font-bold mb-1 purple-text">Sign Up</h2>
+          <p className="text-sm text-center text-white/70 mb-6">Create your AxtraSpace account</p>
 
-      {/* RIGHT FORM PANEL */}
-      <div className="w-full md:w-1/2 flex items-center justify-center px-6 py-10 md:py-16 relative">
-        <div className="w-full max-w-md bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 md:p-10 shadow-[0_8px_30px_rgba(133,38,248,0.25)]">
-          <h2 className="text-center text-3xl font-[Orbitron] tracking-wider mb-1">Sign Up</h2>
-          <p className="text-sm text-center text-white/70 mb-6">Create your AXTRA account</p>
-
-          {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
+          {error && (
+            <div className="bg-red-500/20 border border-red-500/30 text-red-200 text-sm rounded-lg p-3 mb-4">
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSignup} className="space-y-4">
-            <input
-              type="email"
-              placeholder="Email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="nx-input bg-white/10 text-white placeholder-white/60"
-              required
-            />
-            <input
-              type="password"
-              placeholder="Password (min 6 characters)"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="nx-input bg-white/10 text-white placeholder-white/60"
-              required
-            />
+            <div>
+              <label className="block text-sm font-medium text-white/90 mb-1">Email Address</label>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="form-input"
+                required
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-white/90 mb-1">Password</label>
+              <input
+                type="password"
+                placeholder="Min 6 characters"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="form-input"
+                required
+              />
+            </div>
+            
             <button
               type="submit"
               disabled={loading}
-              className="nx-button w-full shadow-lg hover:shadow-purple-400/40 transition duration-300 disabled:opacity-50"
+              className="signup-button gradient-animate mt-2"
             >
-              {loading ? 'Creating Account...' : 'Sign Up'}
+              {loading ? 'Creating Account...' : 'Create Account'}
             </button>
           </form>
 
-          <p className="text-center text-xs text-white/50 mt-6">
+          <p className="text-center text-sm text-white/50 mt-6">
             Already have an account?{' '}
-            <Link href="/login" className="text-purple-300 hover:underline">
-              Login here
+            <Link href="/login" className="text-[#a898ff] hover:text-[#da70d6] transition-colors">
+              Sign In
             </Link>
           </p>
         </div>
+        
+        {/* Footer info */}
+        <p className="text-center text-xs text-white/40 mt-8">
+          © Axtra | Secure signup portal
+        </p>
       </div>
-
-      <style jsx>{`
-        .galaxy-bg-split {
-          background: linear-gradient(135deg, #3f0a8d, #8526f8, #e37bed);
-          background-size: 400% 400%;
-          animation: gradientShift 20s ease infinite;
-        }
-
-        .glow-text {
-          animation: textGlow 4s ease-in-out infinite;
-        }
-
-        @keyframes gradientShift {
-          0%, 100% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-        }
-
-        @keyframes textGlow {
-          0%, 100% {
-            text-shadow: 0 0 4px #fff, 0 0 10px #8526f8, 0 0 20px #e37bed;
-          }
-          50% {
-            text-shadow: 0 0 2px #fff, 0 0 6px #8526f8, 0 0 14px #e37bed;
-          }
-        }
-      `}</style>
     </div>
   );
 }

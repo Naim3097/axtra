@@ -16,6 +16,7 @@ import {
   updateDoc,
   orderBy
 } from 'firebase/firestore';
+import { STATUS_TYPES } from '@/components/AxtraClientLogics';
 import {
   ref,
   uploadBytes,
@@ -150,23 +151,20 @@ export default function AgencyContentPlannerPage() {
         const fileRef = ref(storage, `deliverables/${email}/${cid}_${draft}_${Date.now()}_${file.name}`);
         await uploadBytes(fileRef, file);
         fileUrl = await getDownloadURL(fileRef);
-      }
-
-      const docRef = doc(db, 'contentSubmissions', `${email}_${cid}`);
+      }      const docRef = doc(db, 'contentSubmissions', `${email}_${cid}`);
       await setDoc(docRef, {
         clientEmail: email,
         contentId: cid,
         caption,
         fileUrl,
         draftNumber: draft,
-        status: 'Completed',
+        status: STATUS_TYPES.COMPLETED,
         submittedAt: Timestamp.now(),
       });
 
-      const feedbacks = feedbackLog[cid] || [];
-      if (feedbacks.length > 0 && feedbacks[0].status === 'Submitted') {
+      const feedbacks = feedbackLog[cid] || [];      if (feedbacks.length > 0 && feedbacks[0].status === 'Submitted') {
         await updateDoc(doc(db, 'revisions', feedbacks[0].id), {
-          status: 'Resolved',
+          status: 'Resolved', // Keep for now as this is revision-specific status not part of STATUS_TYPES
           resolvedAt: Timestamp.now(),
         });
       }
@@ -234,11 +232,10 @@ export default function AgencyContentPlannerPage() {
                   <tr key={item.id} className="border-t border-white/10">
                     <td className="p-3 font-bold text-purple-200">{item.id}</td>
                     <td className="p-3">{item.title}</td>
-                    <td className="p-3">
-                      <span className={`px-2 py-1 rounded text-xs ${
-                        sub?.status === 'Completed' ? 'bg-green-700/20 text-green-300' : 'bg-gray-600/20 text-white/60'
+                    <td className="p-3">                      <span className={`px-2 py-1 rounded text-xs ${
+                        sub?.status === STATUS_TYPES.COMPLETED ? 'bg-green-700/20 text-green-300' : 'bg-gray-600/20 text-white/60'
                       }`}>
-                        {sub?.status || 'Pending'}
+                        {sub?.status || STATUS_TYPES.PENDING}
                       </span>
                       {drafts.length > 0 && (
                         <div className="text-[10px] mt-1 text-white/50">Uploaded: {drafts.join(', ')}</div>
