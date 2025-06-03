@@ -36,13 +36,15 @@ export default function Profile() {
   const [reports, setReports] = useState([]);
   // Notifications count for the header
   const [notifications, setNotifications] = useState(0);
-  
-  // New state for orbit animation
+    // New state for orbit animation
   const [orbitActive, setOrbitActive] = useState(false);
   const [selectedOrbit, setSelectedOrbit] = useState(null);
   
   // Add state for screen width
   const [screenWidth, setScreenWidth] = useState(0);
+  
+  // Add state for reports dropdown
+  const [showReportsDropdown, setShowReportsDropdown] = useState(false);
   
   // Custom animation style consistent with other pages and adding new orbital animations
   const style = `
@@ -408,9 +410,20 @@ export default function Profile() {
         unsubReports();
       };
     });
-    
-    return () => unsubAuth();
+      return () => unsubAuth();
   }, [router]);
+  
+  // Handle clicking outside the dropdown to close it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showReportsDropdown && !event.target.closest('.orbit-item') && !event.target.closest('.absolute')) {
+        setShowReportsDropdown(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [showReportsDropdown]);
   
   // Generate orbit items based on number
   const generateOrbitItems = (count) => {
@@ -456,22 +469,24 @@ export default function Profile() {
     } catch (error) {
       console.error('Error signing out:', error);
     }
-  };
-
-  // Handle selection of an orbit item
+  };  // Handle selection of an orbit item
   const handleOrbitSelect = (id) => {
     setSelectedOrbit(id);
     
     // Map orbit selection to tab navigation
     if (id === 'account') {
       setActiveTab('profile');
+      setShowReportsDropdown(false);
     } else if (id === 'invoices') {
       setActiveTab('invoices');
+      setShowReportsDropdown(false);
     } else if (id === 'reports') {
-      setActiveTab('reports');
+      setShowReportsDropdown(!showReportsDropdown);
     } else if (id === 'messages') {
+      setShowReportsDropdown(false);
       router.push('/axtranote');
     } else if (id === 'feed') {
+      setShowReportsDropdown(false);
       router.push('/axtrapost');
     }
   };
@@ -653,8 +668,7 @@ export default function Profile() {
               </div>
             </div>
           </div>
-          
-          {/* Orbit Items - now using the same purple-pink gradient */}
+            {/* Orbit Items - now using the same purple-pink gradient */}
           {orbitItems.map((item, index) => (
             <div 
               key={item.id}
@@ -668,6 +682,68 @@ export default function Profile() {
               <span className="orbit-item-label">{item.label}</span>
             </div>
           ))}
+          
+          {/* Reports Dropdown Menu */}
+          {showReportsDropdown && (
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 mt-8">
+              <div className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-lg rounded-xl border border-white/20 shadow-xl p-4 min-w-[300px] fade-in">
+                <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#c9aaff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Available Reports
+                </h3>
+                <div className="space-y-2">
+                  <button
+                    onClick={() => {
+                      router.push('/reportenfrasysapril2025');
+                      setShowReportsDropdown(false);
+                    }}
+                    className="w-full p-3 bg-gradient-to-r from-[#c9aaff]/10 to-[#e37bed]/10 rounded-lg border border-[#c9aaff]/20 hover:border-[#e37bed]/30 transition-all duration-300 text-left group"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="text-white font-medium text-sm">Enfrasys Digital Marketing Report</h4>
+                        <p className="text-white/60 text-xs mt-1">April 2025 - Microsoft Security Campaign</p>
+                        <div className="flex gap-1 mt-2">
+                          <span className="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full text-xs border border-emerald-400/30">27 Assets</span>
+                          <span className="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full text-xs border border-blue-400/30">3 Campaigns</span>
+                        </div>
+                      </div>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white/40 group-hover:text-[#e37bed] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </button>
+                  
+                  <button
+                    onClick={() => {
+                      router.push('/reports');
+                      setShowReportsDropdown(false);
+                    }}
+                    className="w-full p-3 bg-gradient-to-r from-white/5 to-white/2 rounded-lg border border-white/10 hover:border-white/20 transition-all duration-300 text-left group"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="text-white font-medium text-sm">View All Reports</h4>
+                        <p className="text-white/60 text-xs mt-1">Access your complete reports library</p>
+                      </div>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white/40 group-hover:text-white/60 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+                
+                <button
+                  onClick={() => setShowReportsDropdown(false)}
+                  className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-[#c9aaff] to-[#e37bed] rounded-full flex items-center justify-center text-white text-xs hover:opacity-80 transition-opacity"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+          )}
         </div>
         
         {/* Content container that expands based on selection */}

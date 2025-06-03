@@ -213,14 +213,12 @@ export default function Home() {
               <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto mb-8">
                 Streamline your workflow, approve content, and collaborate with your team - all in one place.
               </p>
-              
-              {showButtons && (
+                {showButtons && (
                 <div className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
                   <Link href="/login" className="button-entrance delay-100">
                     <button className="purple-gradient px-8 py-3 rounded-lg text-white font-medium hover:opacity-90 transition gradient-animate shadow-lg">
                       Sign In
-                    </button>
-                  </Link>
+                    </button>                  </Link>
                   
                   <Link href="/signup" className="button-entrance delay-200">
                     <button className="bg-white/10 backdrop-blur-sm border border-white/20 px-8 py-3 rounded-lg text-white font-medium hover:bg-white/20 transition shadow-lg">
