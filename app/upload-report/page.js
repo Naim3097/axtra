@@ -14,7 +14,8 @@ const clientOptions = [
   { label: 'AceTeam Networks', email: 'sushmita@aceteamnetworks.com' },
   { label: 'Freewill Auto', email: 'freewillauto@gmail.com' },
   { label: 'Dseventeen Motorworks', email: 'd7teenworkjb@gmail.com' },
-  { label: 'Overhaulin Yard', email: 'overhaulinyardsp@gmail.com' }
+  { label: 'Overhaulin Yard', email: 'overhaulinyardsp@gmail.com' },
+  { label: 'BYKI', email: 'admin@byki.com' }
 ];
 
 export default function UploadClientDocument() {

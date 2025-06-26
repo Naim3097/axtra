@@ -123,6 +123,15 @@ export const CLIENT_CONFIG = {
       })),
     ],
   },
+  'byki.com': {
+    name: 'BYKI',
+    deliverables: Array.from({ length: 12 }, (_, i) => ({
+      id: `C${i + 1}`,
+      title: `Static Visual Post ${i + 1}`,
+      deadline: `2025-07-${String(2 + i * 2).padStart(2, '0')}`,
+      directionDeadline: `2025-07-01`,
+    })),
+  },
 };
 
 /**
@@ -262,6 +271,7 @@ export const EMAIL_TO_DOMAIN_MAP = {
   'freewillauto@gmail.com': 'freewillauto.com', // Gmail account mapped to correct domain
   'd7teenworkjb@gmail.com': 'dseventeenmotorworks.com', // Gmail account mapped to correct domain
   'overhaulinyardsp@gmail.com': 'overhaulinyard.com', // Gmail account mapped to correct domain
+  'admin@byki.com': 'byki.com',
   'sales@nexovadigital.com': 'agency' // Agency email
 };
 
