@@ -53,6 +53,30 @@ export default function ReportsPage() {
           </h2>
           <div className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-lg rounded-xl border border-white/20 shadow-lg p-6">
             <div className="grid gap-4">
+              {/* June 2025 Report - Enhanced A4 Format */}
+              <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#c9aaff]/10 to-[#e37bed]/10 rounded-lg border border-[#c9aaff]/20 hover:border-[#e37bed]/30 transition-all duration-300">
+                <div className="flex-1">
+                  <h3 className="font-semibold text-white mb-1">Enfrasys Digital Marketing Report</h3>
+                  <p className="text-sm text-white/70 mb-2">June 2025 - Branding & Content Creation</p>
+                  <div className="flex gap-2 text-xs">
+                    <span className="bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded-full border border-emerald-400/30">69 Assets</span>
+                    <span className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full border border-blue-400/30">3 Campaigns</span>
+                    <span className="bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded-full border border-yellow-400/30">A4 Printable</span>
+                    <span className="bg-red-500/20 text-red-300 px-2 py-1 rounded-full border border-red-400/30">NEW</span>
+                  </div>
+                </div>
+                <a 
+                  href="/reportenfrasysjune2025"
+                  className="bg-gradient-to-r from-[#c9aaff] to-[#e37bed] text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:translate-y-[-1px] flex items-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                  </svg>
+                  View Report
+                </a>
+              </div>
+              
+              {/* April 2025 Report - Original Interactive Format */}
               <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#c9aaff]/10 to-[#e37bed]/10 rounded-lg border border-[#c9aaff]/20 hover:border-[#e37bed]/30 transition-all duration-300">
                 <div className="flex-1">
                   <h3 className="font-semibold text-white mb-1">Enfrasys Digital Marketing Report</h3>

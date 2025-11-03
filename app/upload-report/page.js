@@ -15,7 +15,8 @@ const clientOptions = [
   { label: 'Freewill Auto', email: 'freewillauto@gmail.com' },
   { label: 'Dseventeen Motorworks', email: 'd7teenworkjb@gmail.com' },
   { label: 'Overhaulin Yard', email: 'overhaulinyardsp@gmail.com' },
-  { label: 'BYKI', email: 'admin@byki.com' }
+  { label: 'BYKI', email: 'admin@byki.com' },
+  { label: 'Leanis', email: 'hello@leanis.com.my' }
 ];
 
 export default function UploadClientDocument() {

@@ -67,6 +67,14 @@ const CLIENT_CONFIG = {
       deadline: `2025-07-${String(2 + i * 2).padStart(2, '0')}`,
     })),
   },
+  'leanis.com.my': {
+    sheet: '',
+    deliverables: Array.from({ length: 12 }, (_, i) => ({
+      id: `C${i + 1}`,
+      title: `Static Visual Post ${i + 1}`,
+      deadline: `2025-12-${String(2 + i * 2).padStart(2, '0')}`,
+    })),
+  },
 };
 
 export default function ClientContentPlannerPage() {

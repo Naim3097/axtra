@@ -59,6 +59,8 @@ const mapClientConfigToClientsFormat = () => {
         clientEmail = 'overhaulinyardsp@gmail.com';
       } else if (domain === 'byki.com') {
         clientEmail = 'admin@byki.com';
+      } else if (domain === 'leanis.com.my') {
+        clientEmail = 'hello@leanis.com.my';
       }
     }
 

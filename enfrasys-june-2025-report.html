@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=210mm, initial-scale=1.0">
+  <title>Enfrasys June 2025 Report</title>
+  <style>
+    :root {
+      --axtra-purple: #8526f8;
+      --axtra-violet: #3f0a8d;
+      --axtra-lavender: #c9aaff;
+      --axtra-pink: #e37bed;
+      --axtra-gradient: linear-gradient(135deg, #c9aaff 0%, #e37bed 100%);
+      --axtra-gradient-main: linear-gradient(90deg, #3f0a8d, #8526f8, #e37bed);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(201, 170, 255, 0.2);
+    }
+    
+    @page {
+      size: A4;
+      margin: 18mm 15mm 18mm 15mm;
+    }
+    
+    html, body {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: #1a1a1a;
+      background: linear-gradient(135deg, #fafbff 0%, #f8f9ff 100%);
+      background-attachment: fixed;
+      font-size: 12pt;
+      line-height: 1.6;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    
+    .report-container {
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding: 24px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(133, 38, 248, 0.1);
+    }
+    
+    /* Cover Page Styles */
+    .cover-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f0c29 0%, #24243e 50%, #302b63 100%);
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      margin: -40px -40px 0 -40px;
+      padding: 80px 40px;
+    }
+    
+    .cover-page::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 25% 25%, rgba(201, 170, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(227, 123, 237, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(133, 38, 248, 0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .cover-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+    }
+    
+    .cover-logo {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 32px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    .cover-logo img {
+      width: 80px;
+      height: auto;
+      filter: brightness(1.2);
+    }
+    
+    .cover-title {
+      font-size: 48pt;
+      font-weight: 800;
+      margin: 0 0 16px 0;
+      background: linear-gradient(135deg, #c9aaff 0%, #e37bed 50%, #ffffff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      text-shadow: 0 0 30px rgba(201, 170, 255, 0.3);
+    }
+    
+    .cover-subtitle {
+      font-size: 24pt;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0 0 32px 0;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+    
+    .cover-date {
+      font-size: 16pt;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0 0 48px 0;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .cover-brand-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 24px 32px;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      margin-top: 32px;
+    }
+    
+    .cover-brand-text {
+      font-size: 14pt;
+      color: rgba(255, 255, 255, 0.8);
+      margin: 0 0 8px 0;
+      font-weight: 500;
+    }
+    
+    .cover-company {
+      font-size: 20pt;
+      font-weight: 700;
+      background: linear-gradient(135deg, #c9aaff 0%, #e37bed 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin: 0;
+    }
+    
+    .cover-platform {
+      font-size: 12pt;
+      color: rgba(255, 255, 255, 0.6);
+      margin: 4px 0 0 0;
+      font-style: italic;
+    }
+    
+    .cover-summary-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin: 32px 0;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    
+    .cover-summary-text {
+      font-size: 13pt;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0;
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: center;
+    }
+    
+    .geometric-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .shape {
+      position: absolute;
+      opacity: 0.1;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .shape:nth-child(1) {
+      top: 10%;
+      left: 10%;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(45deg, #c9aaff, #e37bed);
+      border-radius: 50%;
+      animation-delay: 0s;
+    }
+    
+    .shape:nth-child(2) {
+      top: 20%;
+      right: 15%;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, #8526f8, #c9aaff);
+      transform: rotate(45deg);
+      animation-delay: -2s;
+    }
+    
+    .shape:nth-child(3) {
+      bottom: 20%;
+      left: 15%;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(45deg, #e37bed, #8526f8);
+      border-radius: 20px;
+      animation-delay: -4s;
+    }
+    
+    .shape:nth-child(4) {
+      bottom: 15%;
+      right: 10%;
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(45deg, #3f0a8d, #c9aaff);
+      border-radius: 50%;
+      animation-delay: -1s;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-20px) rotate(5deg); }
+      66% { transform: translateY(10px) rotate(-3deg); }
+    }
+    
+    .logo {
+      width: 100px;
+      margin-bottom: 16px;
+    }
+    
+    h1 {
+      font-size: 32pt;
+      margin: 0 0 12px 0;
+      background: var(--axtra-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    
+    h2 {
+      font-size: 20pt;
+      margin: 32px 0 16px 0;
+      color: var(--axtra-purple);
+      font-weight: 600;
+      letter-spacing: -0.2px;
+    }
+    
+    h3 {
+      font-size: 14pt;
+      margin: 24px 0 12px 0;
+      color: #2a2a2a;
+      font-weight: 500;
+      letter-spacing: 0.1px;
+    }
+    
+    .summary {
+      margin-bottom: 32px;
+      padding: 24px;
+      background: rgba(201, 170, 255, 0.04);
+      border-radius: 12px;
+      border: 1px solid rgba(201, 170, 255, 0.2);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 2px 12px rgba(133, 38, 248, 0.08);
+    }
+    
+    .section-divider {
+      border-top: 1px solid var(--axtra-lavender);
+      margin: 32px 0 24px 0;
+      opacity: 0.6;
+    }
+    
+    .asset-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 12px;
+      margin: 0 0 24px 0;
+      page-break-inside: avoid;
+    }
+    
+    .asset {
+      border: 1px solid rgba(201, 170, 255, 0.2);
+      border-radius: 12px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.95);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 140px;
+      max-height: 180px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .asset:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(133, 38, 248, 0.15);
+    }
+    
+    .branding-asset {
+      border: 1px solid rgba(201, 170, 255, 0.15);
+      border-radius: 16px;
+      padding: 32px;
+      background: rgba(255, 255, 255, 0.98);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 240mm;
+      page-break-inside: avoid;
+      page-break-after: always;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(133, 38, 248, 0.08);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    
+    .branding-asset img {
+      max-width: 100%;
+      max-height: 220mm;
+      object-fit: contain;
+      margin-bottom: 16px;
+      border-radius: 4px;
+    }
+    
+    .branding-asset-title {
+      font-size: 16pt;
+      color: var(--axtra-purple);
+      text-align: center;
+      margin-top: 20px;
+      font-weight: 600;
+      letter-spacing: -0.1px;
+    }
+    
+    .asset img, .asset object {
+      max-width: 100%;
+      max-height: 120px;
+      object-fit: contain;
+      margin-bottom: 6px;
+      border-radius: 4px;
+    }
+    
+    .asset-title {
+      font-size: 9pt;
+      color: var(--axtra-purple);
+      text-align: center;
+      margin-top: 8px;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+    
+    .page-break {
+      page-break-after: always;
+      break-after: page;
+      height: 0;
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .executive-summary {
+      background: rgba(201, 170, 255, 0.03);
+      border-left: 4px solid var(--axtra-lavender);
+      padding: 24px;
+      margin: 24px 0;
+      border-radius: 0 12px 12px 0;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 2px 16px rgba(133, 38, 248, 0.06);
+    }
+    
+    .highlight-box {
+      background: var(--axtra-gradient);
+      color: white;
+      padding: 24px;
+      border-radius: 12px;
+      margin: 24px 0;
+      box-shadow: 0 8px 32px rgba(133, 38, 248, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .highlight-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+      pointer-events: none;
+    }
+    
+    .company-credit {
+      color: var(--axtra-purple);
+      font-weight: 600;
+    }
+    
+    @media print {
+      .no-print { display: none !important; }
+      a { color: var(--axtra-purple); text-decoration: none; }
+      .asset img, .asset object { print-color-adjust: exact; }
+      .branding-asset img { print-color-adjust: exact; }
+      header, .summary, .asset, .branding-asset, .executive-summary, .highlight-box {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      body {
+        background: linear-gradient(135deg, #fafbff 0%, #f8f9ff 100%) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .cover-page {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        margin: 0;
+        padding: 0;
+        min-height: 297mm;
+        width: 210mm;
+      }
+      .cover-page::before {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .shape {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .cover-brand-box {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+    
+    /* Social Media - All on one page */
+    .social-media-all {
+      page-break-inside: avoid;
+    }
+    
+    .social-media-grid-all {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+      min-height: 220mm;
+    }
+    
+    .social-media-grid-all .asset-box {
+      break-inside: avoid;
+      border: 1px solid rgba(133, 38, 248, 0.15);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(133, 38, 248, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .social-media-grid-all .asset-box img {
+      width: 100%;
+      height: 160px;
+      object-fit: contain;
+      display: block;
+      background: #f8f9ff;
+    }
+    
+    .social-media-grid-all .asset-box p {
+      padding: 8px 10px;
+      margin: 0;
+      font-size: 9pt;
+      font-weight: 500;
+      color: #3f0a8d;
+      text-align: center;
+      line-height: 1.2;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- COVER PAGE -->
+  <div class="cover-page">
+    <div class="geometric-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+    
+    <div class="cover-content">
+      <div class="cover-logo">
+        <img src="public/logo.png" alt="Enfrasys Logo" />
+      </div>
+      
+      <h1 class="cover-title">Enfrasys</h1>
+      <div class="cover-subtitle">June 2025 Deliverables Report</div>
+      <div class="cover-date">June 2025</div>
+      
+      <div class="cover-summary-box">
+        <div class="cover-summary-text">
+          This report summarizes the content, assets, and activities for Enfrasys in June 2025. It includes social media posts, branding collaterals, and content creation highlights, presented in a print-ready format for easy review and archiving.
+        </div>
+      </div>
+      
+      <div class="cover-brand-box">
+        <div class="cover-brand-text">Prepared by</div>
+        <div class="cover-company">Nexova</div>
+        <div class="cover-platform">via Axtra Platform</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN REPORT CONTENT -->
+  <div class="report-container">
+    <!-- Example asset grid for Social Media Posts - Split across pages (8 per page) -->
+    <section>
+      <h2>Social Media Posts</h2>
+      <!-- Page 1: Posts 1-8 -->
+      <div class="social-media-all">
+        <div class="social-media-grid-all">
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/SOCIAL MEDIA POST/SOCIAL MEDIA POST 1.jpg" alt="Social Media Post 1">
+            <p>Social Media Post 1</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/SOCIAL MEDIA POST/SOCIAL MEDIA POST 2.jpg" alt="Social Media Post 2">
+            <p>Social Media Post 2</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/SOCIAL MEDIA POST/SOCIAL MEDIA POST 3.jpg" alt="Social Media Post 3">
+            <p>Social Media Post 3</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/SOCIAL MEDIA POST/SOCIAL MEDIA POST 4.jpg" alt="Social Media Post 4">
+            <p>Social Media Post 4</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/SOCIAL MEDIA POST/SOCIAL MEDIA POST 5.jpg" alt="Social Media Post 5">
+            <p>Social Media Post 5</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/SOCIAL MEDIA POST/SOCIAL MEDIA POST 6.jpg" alt="Social Media Post 6">
+            <p>Social Media Post 6</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/SOCIAL MEDIA POST/SOCIAL MEDIA POST 7.jpg" alt="Social Media Post 7">
+            <p>Social Media Post 7</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/SOCIAL MEDIA POST/SOCIAL MEDIA POST 8.jpg" alt="Social Media Post 8">
+            <p>Social Media Post 8</p>
+          </div>
+        </div>
+      </div>
+      <hr class="page-break" />
+      
+      <!-- Page 2: Posts 9-14 -->
+      <div class="social-media-all">
+        <h2>Social Media Posts (continued)</h2>
+        <div class="social-media-grid-all">
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/SOCIAL MEDIA POST/SOCIAL MEDIA POST 9.jpg" alt="Social Media Post 9">
+            <p>Social Media Post 9</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/SOCIAL MEDIA POST/SOCIAL MEDIA POST 10.jpg" alt="Social Media Post 10">
+            <p>Social Media Post 10</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/SOCIAL MEDIA POST/SOCIAL MEDIA POST 11.jpg" alt="Social Media Post 11">
+            <p>Social Media Post 11</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/SOCIAL MEDIA POST/SOCIAL MEDIA POST 12.jpg" alt="Social Media Post 12">
+            <p>Social Media Post 12</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/SOCIAL MEDIA POST/SOCIAL MEDIA POST 13.jpg" alt="Social Media Post 13">
+            <p>Social Media Post 13</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/SOCIAL MEDIA POST/SOCIAL MEDIA POST 14.jpg" alt="Social Media Post 14">
+            <p>Social Media Post 14</p>
+          </div>
+          <!-- Empty slots to maintain grid structure -->
+          <div class="asset-box" style="visibility: hidden;"></div>
+          <div class="asset-box" style="visibility: hidden;"></div>
+        </div>
+      </div>
+      <hr class="page-break" />
+    </section>
+    <section>
+      <h2>Branding Collaterals</h2>
+      <!-- Each branding asset gets a full A4 page -->
+      
+      <!-- Backdrop Design -->
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BACKDROP CDO CONVEX-03.jpg" alt="Backdrop CDO Convex" />
+        <div class="branding-asset-title">Backdrop CDO Convex Design</div>
+      </div>
+      
+      <!-- C3 E-Brochure - All 14 Pages -->
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - C3 - E BROCHURE_Page_01.png" alt="C3 E-Brochure Page 1" />
+        <div class="branding-asset-title">C3 E-Brochure - Page 1</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - C3 - E BROCHURE_Page_02.png" alt="C3 E-Brochure Page 2" />
+        <div class="branding-asset-title">C3 E-Brochure - Page 2</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - C3 - E BROCHURE_Page_03.png" alt="C3 E-Brochure Page 3" />
+        <div class="branding-asset-title">C3 E-Brochure - Page 3</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - C3 - E BROCHURE_Page_04.png" alt="C3 E-Brochure Page 4" />
+        <div class="branding-asset-title">C3 E-Brochure - Page 4</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - C3 - E BROCHURE_Page_05.png" alt="C3 E-Brochure Page 5" />
+        <div class="branding-asset-title">C3 E-Brochure - Page 5</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - C3 - E BROCHURE_Page_06.png" alt="C3 E-Brochure Page 6" />
+        <div class="branding-asset-title">C3 E-Brochure - Page 6</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - C3 - E BROCHURE_Page_07.png" alt="C3 E-Brochure Page 7" />
+        <div class="branding-asset-title">C3 E-Brochure - Page 7</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - C3 - E BROCHURE_Page_08.png" alt="C3 E-Brochure Page 8" />
+        <div class="branding-asset-title">C3 E-Brochure - Page 8</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - C3 - E BROCHURE_Page_09.png" alt="C3 E-Brochure Page 9" />
+        <div class="branding-asset-title">C3 E-Brochure - Page 9</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - C3 - E BROCHURE_Page_10.png" alt="C3 E-Brochure Page 10" />
+        <div class="branding-asset-title">C3 E-Brochure - Page 10</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - C3 - E BROCHURE_Page_11.png" alt="C3 E-Brochure Page 11" />
+        <div class="branding-asset-title">C3 E-Brochure - Page 11</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - C3 - E BROCHURE_Page_12.png" alt="C3 E-Brochure Page 12" />
+        <div class="branding-asset-title">C3 E-Brochure - Page 12</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - C3 - E BROCHURE_Page_13.png" alt="C3 E-Brochure Page 13" />
+        <div class="branding-asset-title">C3 E-Brochure - Page 13</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - C3 - E BROCHURE_Page_14.png" alt="C3 E-Brochure Page 14" />
+        <div class="branding-asset-title">C3 E-Brochure - Page 14</div>
+      </div>
+      
+      <!-- C4 Shirt Design -->
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - C4 - SHIRT DESIGN.jpg" alt="C4 Shirt Design" />
+        <div class="branding-asset-title">C4 Shirt Design</div>
+      </div>
+      
+      <!-- Company Profile - All 14 Pages -->
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - COMPANY PROFILE CHANGE COLOR_Page_01.png" alt="Company Profile Page 1" />
+        <div class="branding-asset-title">Company Profile - Page 1</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - COMPANY PROFILE CHANGE COLOR_Page_02.png" alt="Company Profile Page 2" />
+        <div class="branding-asset-title">Company Profile - Page 2</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - COMPANY PROFILE CHANGE COLOR_Page_03.png" alt="Company Profile Page 3" />
+        <div class="branding-asset-title">Company Profile - Page 3</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - COMPANY PROFILE CHANGE COLOR_Page_04.png" alt="Company Profile Page 4" />
+        <div class="branding-asset-title">Company Profile - Page 4</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - COMPANY PROFILE CHANGE COLOR_Page_05.png" alt="Company Profile Page 5" />
+        <div class="branding-asset-title">Company Profile - Page 5</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - COMPANY PROFILE CHANGE COLOR_Page_06.png" alt="Company Profile Page 6" />
+        <div class="branding-asset-title">Company Profile - Page 6</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - COMPANY PROFILE CHANGE COLOR_Page_07.png" alt="Company Profile Page 7" />
+        <div class="branding-asset-title">Company Profile - Page 7</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - COMPANY PROFILE CHANGE COLOR_Page_08.png" alt="Company Profile Page 8" />
+        <div class="branding-asset-title">Company Profile - Page 8</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - COMPANY PROFILE CHANGE COLOR_Page_09.png" alt="Company Profile Page 9" />
+        <div class="branding-asset-title">Company Profile - Page 9</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - COMPANY PROFILE CHANGE COLOR_Page_10.png" alt="Company Profile Page 10" />
+        <div class="branding-asset-title">Company Profile - Page 10</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - COMPANY PROFILE CHANGE COLOR_Page_11.png" alt="Company Profile Page 11" />
+        <div class="branding-asset-title">Company Profile - Page 11</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - COMPANY PROFILE CHANGE COLOR_Page_12.png" alt="Company Profile Page 12" />
+        <div class="branding-asset-title">Company Profile - Page 12</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - COMPANY PROFILE CHANGE COLOR_Page_13.png" alt="Company Profile Page 13" />
+        <div class="branding-asset-title">Company Profile - Page 13</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - COMPANY PROFILE CHANGE COLOR_Page_14.png" alt="Company Profile Page 14" />
+        <div class="branding-asset-title">Company Profile - Page 14</div>
+      </div>
+      
+      <!-- Email Signature -->
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/BRANDING - EMAIL SIGNATURE CHANGE COLOR-03.jpg" alt="Email Signature" />
+        <div class="branding-asset-title">Email Signature Design</div>
+      </div>
+      
+      <!-- Template Updated - All 18 Pages -->
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0001.jpg" alt="Template Updated Page 1" />
+        <div class="branding-asset-title">Updated Template - Page 1</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0002.jpg" alt="Template Updated Page 2" />
+        <div class="branding-asset-title">Updated Template - Page 2</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0003.jpg" alt="Template Updated Page 3" />
+        <div class="branding-asset-title">Updated Template - Page 3</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0004.jpg" alt="Template Updated Page 4" />
+        <div class="branding-asset-title">Updated Template - Page 4</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0005.jpg" alt="Template Updated Page 5" />
+        <div class="branding-asset-title">Updated Template - Page 5</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0006.jpg" alt="Template Updated Page 6" />
+        <div class="branding-asset-title">Updated Template - Page 6</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0007.jpg" alt="Template Updated Page 7" />
+        <div class="branding-asset-title">Updated Template - Page 7</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0008.jpg" alt="Template Updated Page 8" />
+        <div class="branding-asset-title">Updated Template - Page 8</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0009.jpg" alt="Template Updated Page 9" />
+        <div class="branding-asset-title">Updated Template - Page 9</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0010.jpg" alt="Template Updated Page 10" />
+        <div class="branding-asset-title">Updated Template - Page 10</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0011.jpg" alt="Template Updated Page 11" />
+        <div class="branding-asset-title">Updated Template - Page 11</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0012.jpg" alt="Template Updated Page 12" />
+        <div class="branding-asset-title">Updated Template - Page 12</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0013.jpg" alt="Template Updated Page 13" />
+        <div class="branding-asset-title">Updated Template - Page 13</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0014.jpg" alt="Template Updated Page 14" />
+        <div class="branding-asset-title">Updated Template - Page 14</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0015.jpg" alt="Template Updated Page 15" />
+        <div class="branding-asset-title">Updated Template - Page 15</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0016.jpg" alt="Template Updated Page 16" />
+        <div class="branding-asset-title">Updated Template - Page 16</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0017.jpg" alt="Template Updated Page 17" />
+        <div class="branding-asset-title">Updated Template - Page 17</div>
+      </div>
+      
+      <div class="branding-asset">
+        <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/BRANDING COLLATERALS/TEMPLATE UPDATED CHANGE COLOR_page-0018.jpg" alt="Template Updated Page 18" />
+        <div class="branding-asset-title">Updated Template - Page 18</div>
+      </div>
+      
+    </section>
+    <section>
+      <h2>Content Creation</h2>
+      <!-- All Content Creation assets (7 items) - using bigger format -->
+      <div class="social-media-all">
+        <div class="social-media-grid-all">
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/CONTENT CREATION/SOCIAL MEDIA - C1.jpg" alt="Social Media Content C1" />
+            <p>Social Media - C1</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/CONTENT CREATION/SOCIAL MEDIA - C2.jpg" alt="Social Media Content C2" />
+            <p>Social Media - C2</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/CONTENT CREATION/SOCIAL MEDIA - C6.jpg" alt="Social Media Content C6" />
+            <p>Social Media - C6</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/CONTENT CREATION/SOCIAL MEDIA - C7.jpg" alt="Social Media Content C7" />
+            <p>Social Media - C7</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/CONTENT CREATION/SOCIAL MEDIA - C8.jpg" alt="Social Media Content C8" />
+            <p>Social Media - C8</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/CONTENT CREATION/SOCIAL MEDIA - C9.jpg" alt="Social Media Content C9" />
+            <p>Social Media - C9</p>
+          </div>
+          <div class="asset-box">
+            <img src="Enfrasys Reporting/JUNE 2025-20250703T120000Z-001/JUNE 2025/CONTENT CREATION/SOCIAL MEDIA - C10.jpg" alt="Social Media Content C10" />
+            <p>Social Media - C10</p>
+          </div>
+          <!-- Empty slot to maintain grid structure -->
+          <div class="asset-box" style="visibility: hidden;"></div>
+        </div>
+      </div>
+      <hr class="page-break" />
+    </section>
+    
+    <!-- Professional Summary Page -->
+    <div class="page-break"></div>
+    <section>
+      <h2>Executive Summary - June 2025 Deliverables</h2>
+      
+      <div style="margin-bottom: 24px;">
+        <h3>Project Overview</h3>
+        <p>During June 2025, Axtra successfully delivered a comprehensive suite of branding and marketing materials for Enfrasys, demonstrating our commitment to elevating their brand presence and market positioning.</p>
+      </div>
+      
+      <div style="margin-bottom: 24px;">
+        <h3>Key Deliverables Completed</h3>
+        <div style="margin-left: 20px;">
+          <p><strong>1. Social Media Campaign (14 Posts)</strong></p>
+          <p style="margin-left: 16px; color: #666;">• Developed 14 engaging social media posts to enhance online presence<br>
+          • Content designed for optimal engagement across multiple platforms<br>
+          • Consistent brand messaging and visual identity maintained</p>
+          
+          <p><strong>2. Comprehensive Branding Package (48 Assets)</strong></p>
+          <p style="margin-left: 16px; color: #666;">• <em>Backdrop Design:</em> Professional event backdrop for CDO Convex<br>
+          • <em>C3 E-Brochure:</em> 14-page digital brochure showcasing services<br>
+          • <em>Company Profile:</em> Complete 14-page corporate profile redesign<br>
+          • <em>Marketing Templates:</em> 18-page updated template suite<br>
+          • <em>Corporate Merchandise:</em> C4 shirt design for brand consistency<br>
+          • <em>Digital Signature:</em> Professional email signature design</p>
+          
+          <p><strong>3. Content Creation Portfolio (7 Assets)</strong></p>
+          <p style="margin-left: 16px; color: #666;">• Custom social media content tailored to target audience<br>
+          • Visual storytelling elements for brand narrative<br>
+          • Multi-format content for diverse marketing channels</p>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 24px;">
+        <h3>Impact & Value Delivered</h3>
+        <div style="background: #f8fafc; padding: 16px; border-radius: 6px; border-left: 4px solid #3949ab;">
+          <p style="margin: 0;"><strong>Total Assets Delivered:</strong> 69 professional marketing materials<br>
+          <strong>Brand Consistency:</strong> Unified visual identity across all deliverables<br>
+          <strong>Market Ready:</strong> Print and digital-ready formats for immediate deployment<br>
+          <strong>Professional Quality:</strong> High-resolution assets suitable for all marketing channels</p>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 24px;">
+        <h3>Strategic Recommendations for Moving Forward</h3>
+        <div style="margin-left: 20px;">
+          <p><strong>1. Digital Marketing Optimization</strong></p>
+          <p style="margin-left: 16px; color: #666;">• Implement A/B testing for social media posts to optimize engagement<br>
+          • Develop video content to complement static assets<br>
+          • Create interactive digital versions of brochures for enhanced user experience</p>
+          
+          <p><strong>2. Brand Expansion Opportunities</strong></p>
+          <p style="margin-left: 16px; color: #666;">• Create additional merchandise designs beyond shirts<br>
+          • Consider seasonal campaign variations to maintain freshness<br>
+          • Explore new product categories for brand extension</p>
+          
+          <p><strong>3. Performance Tracking & Analytics</strong></p>
+          <p style="margin-left: 16px; color: #666;">• Track brand recognition improvements through market research<br>
+          • Monitor asset utilization across different marketing channels<br>
+          • Assess impact on brand perception and market positioning</p>
+          
+          <p><strong>4. Content Strategy Enhancement</strong></p>
+          <p style="margin-left: 16px; color: #666;">• Create customer testimonial and case study materials<br>
+          • Develop industry-specific content for target markets<br>
+          • Focus on storytelling elements that resonate with core audience</p>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 24px;">
+        <h3>Next Steps & Collaboration</h3>
+        <p>Nexova remains committed to supporting Enfrasys' continued growth and market expansion through our Axtra platform. We recommend scheduling a quarterly review to assess the performance of these materials and plan the next phase of brand development initiatives.</p>
+      </div>
+      
+      <div style="text-align: center; padding: 20px; background: #f5f7fa; border-radius: 8px; border: 1px solid #e3e6ed;">
+        <p style="margin: 0; font-weight: bold; color: #3949ab;">Thank you for trusting Nexova with your brand development needs.</p>
+        <p style="margin: 8px 0 0 0; color: #666;">We look forward to continuing our successful partnership through our Axtra platform.</p>
+      </div>
+    </section>
+    
+    <!-- Add more sections or asset grids as needed, following the same structure -->
+    <footer style="text-align:center; color:#888; font-size:10pt; margin-top:32px;">
+      &copy; 2025 Enfrasys | Report generated by Nexova via Axtra platform
+    </footer>
+  </div>
+</body>
+</html>

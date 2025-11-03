@@ -696,6 +696,30 @@ export default function Profile() {
                 <div className="space-y-2">
                   <button
                     onClick={() => {
+                      router.push('/reportenfrasysjune2025');
+                      setShowReportsDropdown(false);
+                    }}
+                    className="w-full p-3 bg-gradient-to-r from-[#c9aaff]/10 to-[#e37bed]/10 rounded-lg border border-[#c9aaff]/20 hover:border-[#e37bed]/30 transition-all duration-300 text-left group"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="text-white font-medium text-sm">Enfrasys Digital Marketing Report</h4>
+                        <p className="text-white/60 text-xs mt-1">June 2025 - Branding & Content Creation</p>
+                        <div className="flex gap-1 mt-2">
+                          <span className="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full text-xs border border-emerald-400/30">69 Assets</span>
+                          <span className="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full text-xs border border-blue-400/30">3 Campaigns</span>
+                          <span className="bg-yellow-500/20 text-yellow-300 px-2 py-0.5 rounded-full text-xs border border-yellow-400/30">A4 Print</span>
+                          <span className="bg-red-500/20 text-red-300 px-2 py-0.5 rounded-full text-xs border border-red-400/30">NEW</span>
+                        </div>
+                      </div>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white/40 group-hover:text-[#e37bed] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </button>
+                  
+                  <button
+                    onClick={() => {
                       router.push('/reportenfrasysapril2025');
                       setShowReportsDropdown(false);
                     }}
