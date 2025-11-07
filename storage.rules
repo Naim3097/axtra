@@ -1,0 +1,62 @@
+﻿rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Helper function to check if user is agency
+    function isAgency() {
+      return request.auth != null && (
+        request.auth.token.email == 'sales@nexovadigital.com' ||
+        request.auth.token.email == 'agency@nexovadigital.com'
+      );
+    }
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Deliverables - agency uploads drafts here
+    match /deliverables/{allPaths=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAgency();
+    }
+    
+    // Content directions
+    match /contentDirections/{userId}/{fileName=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (request.auth.uid == userId || isAgency());
+    }
+    
+    // Revisions
+    match /revisions/{userId}/{fileName=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (request.auth.uid == userId || isAgency());
+    }
+    
+    // Content submissions
+    match /contentSubmissions/{userId}/{fileName=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (request.auth.uid == userId || isAgency());
+    }
+    
+    // Reports, invoices, billing
+    match /reports/{clientEmail}/{fileName=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAgency();
+    }
+    
+    match /invoices/{clientEmail}/{fileName=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAgency();
+    }
+    
+    match /billing/{clientEmail}/{fileName=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAgency();
+    }
+    
+    // Default fallback
+    match /{allPaths=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAgency();
+    }
+  }
+}

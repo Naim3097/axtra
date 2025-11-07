@@ -1,0 +1,73 @@
+﻿rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAgency() {
+      return request.auth != null && (
+        request.auth.token.email == 'sales@nexovadigital.com' ||
+        request.auth.token.email == 'agency@nexovadigital.com'
+      );
+    }
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(email) {
+      return request.auth != null && request.auth.token.email.toLowerCase() == email.toLowerCase();
+    }
+    
+    // Base rule - agency can do anything
+    match /{document=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAgency();
+    }
+    
+    // Content directions
+    match /contentDirections/{docId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated();
+      allow delete: if isAgency();
+    }
+    
+    // Revisions
+    match /revisions/{docId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && (isAgency() || isOwner(resource.data.clientEmail));
+      allow delete: if isAgency();
+    }
+    
+    // FIXED: Content submissions - use request.resource for create, resource for update
+    match /contentSubmissions/{docId} {
+      allow read: if isAuthenticated();
+      allow create: if isAgency() || (
+        isAuthenticated() && (
+          (request.resource.data.clientEmail != null && isOwner(request.resource.data.clientEmail)) ||
+          docId.lower().contains(request.auth.token.email.lower())
+        )
+      );
+      allow update: if isAgency() || (
+        isAuthenticated() && (
+          (resource.data.clientEmail != null && isOwner(resource.data.clientEmail)) ||
+          docId.lower().contains(request.auth.token.email.lower())
+        )
+      );
+      allow delete: if isAgency();
+    }
+    
+    // Content orders
+    match /contentOrders/{docId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && (isAgency() || isOwner(resource.data.clientEmail));
+      allow delete: if isAgency();
+    }
+    
+    // User profiles
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (request.auth.uid == userId || isAgency());
+    }
+  }
+}
