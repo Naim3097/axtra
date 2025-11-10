@@ -38,20 +38,18 @@ service cloud.firestore {
       allow delete: if isAgency();
     }
     
-    // FIXED: Content submissions - use request.resource for create, resource for update
+    // Content submissions - allow clients to read and approve (update) their own content
     match /contentSubmissions/{docId} {
       allow read: if isAuthenticated();
       allow create: if isAgency() || (
-        isAuthenticated() && (
-          (request.resource.data.clientEmail != null && isOwner(request.resource.data.clientEmail)) ||
-          docId.lower().contains(request.auth.token.email.lower())
-        )
+        isAuthenticated() && 
+        request.resource.data.clientEmail != null && 
+        isOwner(request.resource.data.clientEmail)
       );
-      allow update: if isAgency() || (
-        isAuthenticated() && (
-          (resource.data.clientEmail != null && isOwner(resource.data.clientEmail)) ||
-          docId.lower().contains(request.auth.token.email.lower())
-        )
+      // Allow client to approve their own content by checking clientEmail field
+      allow update: if isAuthenticated() && (
+        isAgency() ||
+        (resource.data.clientEmail != null && isOwner(resource.data.clientEmail))
       );
       allow delete: if isAgency();
     }

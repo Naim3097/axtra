@@ -13,10 +13,12 @@ service firebase.storage {
       return request.auth != null;
     }
     
-    // Deliverables - agency uploads drafts here
+    // Deliverables - agency uploads drafts here, clients can view their own
+    // Path format: deliverables/{email}/{filename}
+    // Note: email contains @ and . characters (e.g., hello@leanis.com.my)
     match /deliverables/{allPaths=**} {
-      allow read: if isAuthenticated();
-      allow write: if isAgency();
+      allow read: if isAuthenticated();  // Any authenticated user can read deliverables
+      allow write: if isAgency();        // Only agency can write
     }
     
     // Content directions

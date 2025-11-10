@@ -526,6 +526,9 @@ export default function AxtraNotes() {
       
       // Document exists, proceed with update
       console.log("Document data:", docSnap.data());
+      console.log("Document clientEmail field:", docSnap.data().clientEmail);
+      console.log("Current user email:", user.email);
+      console.log("Emails match:", docSnap.data().clientEmail?.toLowerCase() === user.email.toLowerCase());
       
       // Update the document with approval data
       await updateDoc(docRef, {

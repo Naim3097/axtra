@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import {
   doc,
@@ -186,6 +186,47 @@ const AxtraNotesModal = ({
   const remainingFeedbackCycles = currentItem?.progress 
     ? currentItem.progress.total - currentItem.progress.current 
     : 0;
+  
+  // State to hold refreshed image URL with valid token
+  const [refreshedImageUrl, setRefreshedImageUrl] = useState(null);
+  const [imageLoadError, setImageLoadError] = useState(false);
+  
+  // Refresh the image URL when modal opens to ensure valid access token
+  useEffect(() => {
+    const refreshImageUrl = async () => {
+      if (currentItem?.imageUrl && storage && user) {
+        try {
+          // Extract the storage path from the URL
+          // URL format: https://firebasestorage.googleapis.com/v0/b/{bucket}/o/{path}?alt=media&token={token}
+          const urlMatch = currentItem.imageUrl.match(/\/o\/(.+?)\?/);
+          if (urlMatch) {
+            const encodedPath = urlMatch[1];
+            const storagePath = decodeURIComponent(encodedPath);
+            
+            // Get a fresh download URL with new token
+            const fileRef = ref(storage, storagePath);
+            const freshUrl = await getDownloadURL(fileRef);
+            setRefreshedImageUrl(freshUrl);
+            setImageLoadError(false);
+            console.log('Refreshed image URL with new token for path:', storagePath);
+          } else {
+            // If we can't parse the URL, use the original
+            setRefreshedImageUrl(currentItem.imageUrl);
+          }
+        } catch (error) {
+          console.error('Error refreshing image URL:', error);
+          console.error('Error details:', error.code, error.message);
+          setImageLoadError(true);
+          // Try to use the original URL anyway
+          setRefreshedImageUrl(currentItem.imageUrl);
+        }
+      }
+    };
+    
+    if (show && type !== 'direction') {
+      refreshImageUrl();
+    }
+  }, [show, activeContentId, currentItem?.imageUrl, storage, user, type]);
   
   // CSS styles for consistent visual appearance with other components
   const modalStyle = `
@@ -415,20 +456,51 @@ const AxtraNotesModal = ({
                 {/* Left Column - Content */}
                 <div className="lg:col-span-2 space-y-6">
                   {/* Content Image/Preview */}
-                  {currentItem.imageUrl && (
+                  {(currentItem.imageUrl || refreshedImageUrl) && (
                     <div className="bg-black/20 rounded-lg overflow-hidden border border-white/10 aspect-video flex items-center justify-center">
-                      {currentItem.imageUrl.toLowerCase().endsWith('.pdf') ? (
+                      {imageLoadError ? (
+                        <div className="text-center p-6">
+                          <div className="w-12 h-12 mx-auto bg-red-900/20 rounded-full flex items-center justify-center mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                          </div>
+                          <p className="text-white/70 text-sm mb-2">Unable to load file preview</p>
+                          <p className="text-white/50 text-xs mb-3">Permission error or file not found</p>
+                          <a 
+                            href={refreshedImageUrl || currentItem.imageUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="mt-2 inline-block px-3 py-1 text-sm bg-white/10 hover:bg-white/20 rounded-lg text-white transition"
+                          >
+                            Try Open in New Tab
+                          </a>
+                        </div>
+                      ) : !refreshedImageUrl ? (
+                        <div className="text-center p-6">
+                          <div className="w-12 h-12 mx-auto bg-purple-900/20 rounded-full flex items-center justify-center mb-2 animate-pulse">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                          </div>
+                          <p className="text-white/70 text-sm">Loading file...</p>
+                        </div>
+                      ) : refreshedImageUrl.toLowerCase().endsWith('.pdf') ? (
                         <iframe 
-                          src={`${currentItem.imageUrl}#view=FitH`} 
+                          src={`${refreshedImageUrl}#view=FitH`} 
                           className="w-full h-full border-0" 
                           style={{height: "300px"}}
                           title="PDF Preview"
                         ></iframe>
-                      ) : currentItem.imageUrl.toLowerCase().match(/\.(jpeg|jpg|png|gif|webp)$/) ? (
+                      ) : refreshedImageUrl.toLowerCase().match(/\.(jpeg|jpg|png|gif|webp)$/) ? (
                         <img 
-                          src={currentItem.imageUrl} 
+                          src={refreshedImageUrl} 
                           alt={currentItem.contentType}
                           className="max-w-full max-h-full object-contain"
+                          onError={() => {
+                            console.error('Image failed to load:', refreshedImageUrl);
+                            setImageLoadError(true);
+                          }}
                         />
                       ) : (
                         <div className="text-center p-6">
@@ -439,7 +511,7 @@ const AxtraNotesModal = ({
                           </div>
                           <p className="text-white/70 text-sm">{currentItem.contentType} document</p>
                           <a 
-                            href={currentItem.imageUrl} 
+                            href={refreshedImageUrl} 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="mt-2 inline-block px-3 py-1 text-sm bg-white/10 hover:bg-white/20 rounded-lg text-white transition"

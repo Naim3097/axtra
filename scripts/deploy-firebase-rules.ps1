@@ -40,21 +40,41 @@ $storageRules = @"
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    // Base rules
+    // Helper function to check if user is agency
+    function isAgency() {
+      return request.auth != null && (
+        request.auth.token.email == 'sales@nexovadigital.com' ||
+        request.auth.token.email == 'agency@nexovadigital.com'
+      );
+    }
+    
+    // Base rules - agency can access everything
     match /{allPaths=**} {
-      allow read, write: if request.auth != null && request.auth.token.admin == true;
+      allow read, write: if isAgency();
     }
     
     // Allow authenticated users to upload to their own contentDirections folder
     match /contentDirections/{userId}/{fileName} {
-      allow read: if request.auth != null && (request.auth.uid == userId || request.auth.token.admin == true);
+      allow read: if request.auth != null && (request.auth.uid == userId || isAgency());
       allow write: if request.auth != null && request.auth.uid == userId;
     }
     
     // Allow authenticated users to upload revision files
     match /revisions/{userId}/{fileName} {
-      allow read: if request.auth != null && (request.auth.uid == userId || request.auth.token.admin == true);
+      allow read: if request.auth != null && (request.auth.uid == userId || isAgency());
       allow write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Allow agency to upload deliverables (draft files) for any client
+    match /deliverables/{clientPath}/{fileName} {
+      allow read, write: if isAgency();
+      allow read: if request.auth != null; // Clients can read their deliverables
+    }
+    
+    // Allow general authenticated access for other paths
+    match /{path=**} {
+      allow read: if request.auth != null;
+      allow write: if isAgency();
     }
   }
 }
